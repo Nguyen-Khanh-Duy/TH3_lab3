@@ -1,0 +1,38 @@
+package thuchanh3;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
+	public class Order {
+	    private int orderID;
+	    private LocalDate orderDate;
+	    private List<OrderDetail> lineItems;
+
+	    public Order(int orderID, LocalDate orderDate) {
+	        this.orderID = orderID;
+	        this.orderDate = orderDate;
+	        this.lineItems = new ArrayList<>();
+	    }
+	    public int getorderID() {
+	        return orderID;
+	    }
+	    public void setOrderID(int orderID) {
+	        this.orderID = orderID;
+	    }
+	    public void addLineItem(Product product, int quantity) {
+	        lineItems.add(new OrderDetail(product, quantity));
+	    }
+
+	    public double calcTotalCharge() {
+	        double totalCharge = 0;
+	        for (OrderDetail orderDetail : lineItems) {
+	            totalCharge += orderDetail.calcTotalPrice();
+	        }
+	        return totalCharge;
+	    }
+
+	    @Override
+	    public String toString() {
+	        return "Order ID: " + orderID + ", Order Date: " + orderDate;
+	    }
+	}
